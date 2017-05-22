@@ -1,0 +1,28 @@
+<div *ngIf="loggedIn">
+  <h5>
+    Current User: {{currentUserName}}
+    <button (click)="onLogout()">Logout</button>
+  </h5>
+</div>
+
+<fieldset *ngIf="loggedOut">
+  <legend>Account Login</legend>
+  <form (submit)="onLogin()" #formData="ngForm">
+    User Name: <input type="text" name="userName" [(ngModel)]="account.userName" #userName="ngModel">
+    Password: <input type="password" name="password" [(ngModel)]="account.password" #password="ngModel">
+    <button type="submit" [disabled]="!formData.form.valid">Login</button>
+  </form>
+</fieldset>
+<fieldset *ngIf="loggedOut">
+  <legend>New User? Register Here</legend>
+  <form (submit)="onRegister()" #formData="ngForm">
+    User Name: <input type="text" name="userName" [(ngModel)]="account.userName" #firstName="ngModel">
+    Password: <input type="password" name="password" [(ngModel)]="account.password" #password="ngModel">
+    Confirm Password: <input type="password" name="password2" [(ngModel)]="password2">
+    <button type="submit" [disabled]="!formData.form.valid">Register</button>
+  </form>
+</fieldset>
+<!-- flash any error messages -->
+<div *ngIf="errorMessage">
+  <h5 class="red">Error: {{errorMessage}}</h5>
+</div>

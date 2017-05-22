@@ -1,0 +1,25 @@
+<div>
+<h3>Product Listing</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th><th>Descr</th><th>Qty</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of this._storeComponent.products">
+      <td>{{product.name}}</td><td>{{product.descr}}</td><td>{{product.qty}}</td>
+    </tr>
+  </tbody>
+</table>
+<hr>
+<h4>Add New Product</h4>
+<form (submit)="onCreateMade()" #formData="ngForm">
+  Name: <input type="text" name="name" [(ngModel)]="newProduct.name" #name="ngModel">
+  Initial Quantity: <input type="number" name="qty" [(ngModel)]="newProduct.qty" #qty="ngModel">
+  <p>
+  Description: <textarea name="descr" rows="4" cols="40" [(ngModel)]="newProduct.descr" #descr="ngModel"></textarea>
+  <button type="submit" [disabled]="!formData.form.valid">Create</button>
+  </p>
+</form>
+</div>

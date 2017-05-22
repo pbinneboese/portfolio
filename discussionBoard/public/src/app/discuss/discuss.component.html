@@ -1,0 +1,24 @@
+<div [ngSwitch]="selectedView">
+<h3>Discussion App</h3>
+<app-login *ngSwitchCase="'Login'" [loggedIn]="loggedIn" [loggedOut]="loggedOut" [currentUserName]="currentUserName"></app-login>
+<!-- Only show discussion apps when logged in -->
+<div *ngIf="loggedIn">
+  <button (click)="onSelectLogin()">Account</button>
+  <button (click)="onSelectDashboard()">Topic Dashboard</button>
+  <!-- <button (click)="onSelectTopic()">Show Topic</button>
+  <button (click)="onSelectProfile()">User Profile</button> -->
+  <app-dashboard *ngSwitchCase="'Dashboard'"></app-dashboard>
+  <app-topic *ngSwitchCase="'Topic'"></app-topic>
+  <app-profile *ngSwitchCase="'Profile'" ></app-profile>
+</div>
+<!-- Show all accounts (for debugging) -->
+<!-- <div class="green">
+  <p>Current Accounts:</p>
+  <ul>
+    <li *ngFor="let account of accounts">{{account.userName}}</li>
+  </ul>
+</div> -->
+<!-- flash any error messages -->
+<div *ngIf="errorMessage">
+  <h5 class="red">Error: {{errorMessage}}</h5>
+</div>

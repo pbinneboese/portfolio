@@ -1,0 +1,23 @@
+<div>
+<h3>Customer Listing</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Customer Name</th><th>Email</th><th>Start Date</th><th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let customer of this._storeComponent.customers">
+      <td>{{customer.name}}</td><td>{{customer.email}}</td><td>{{customer.createdAt | date:'mediumDate'}}</td>
+      <td><button (click)="onDeleteButton(customer)">Remove</button></td>
+    </tr>
+  </tbody>
+</table>
+<hr>
+<h4>Add New Customer</h4>
+<form (submit)="onCreateMade()" #formData="ngForm">
+  Customer: <input type="text" name="name" [(ngModel)]="newCustomer.name" #name="ngModel">
+  Email: <input type="email" name="email" [(ngModel)]="newCustomer.email" #email="ngModel">
+  <button type="submit" [disabled]="!formData.form.valid">Customer</button>
+</form>
+</div>

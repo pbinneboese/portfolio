@@ -1,0 +1,34 @@
+<div *ngIf="selTopic">
+<h3>Topic</h3>
+<!-- Print Topic -->
+<h4>{{selTopic.user}} Posted this Topic:</h4>
+<h4>{{selTopic.name}}</h4>
+<p>Description: {{selTopic.description}}</p>
+<h5>Post Your Answer Here:</h5>
+<form (submit)="onPostAnswer()" #formData="ngForm">
+  <textarea name="answer" rows="2" cols="40" [(ngModel)]="newAnswer.text" #answer="ngModel"></textarea>
+  <br>
+  <button type="submit" [disabled]="!formData.form.valid">Answer</button>
+</form>
+<!-- Print List of Answers -->
+<ul>
+  <li *ngFor="let answer of selTopic.answers">
+    <hr>
+    {{answer.user}}: {{answer.text}}<br>
+    <button class="green" name="like" (click)="onPostLike(answer)">Like</button>: {{answer.likes}}
+    <button class="red" name="dislike" (click)="onPostDislike(answer)">Dislike</button>: {{answer.dislikes}}
+    <!-- Print List of Comments -->
+    <ul>
+      <li *ngFor="let comment of answer.comments">
+        {{comment.user}}: {{comment.text}}
+      </li>
+    </ul>
+    <form #formData="ngForm" (ngSubmit)="onPostComment(formData, answer)">
+      <textarea name="comment" rows="1" cols="40" ngModel required #comment="ngModel"></textarea>
+      <!-- <textarea name="comment" rows="1" cols="40" [(ngModel)]="newComment.text" #comment="ngModel"></textarea> -->
+      <br>
+      <button type="submit" [disabled]="!formData.form.valid">Comment</button>
+    </form>
+  </li>
+</ul>
+</div>

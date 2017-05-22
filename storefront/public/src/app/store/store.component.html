@@ -1,0 +1,12 @@
+<h1>The Store</h1>
+<span [ngSwitch]="selectedView">
+  <button (click)="onSelectDashboard()">Dashboard</button>
+  <button (click)="onSelectOrders()">Orders</button>
+  <button (click)="onSelectCustomers()">Customers</button>
+  <button (click)="onSelectProducts()">Products</button>
+
+  <app-dashboard *ngSwitchCase="'Dashboard'"></app-dashboard>
+  <app-orders *ngSwitchCase="'Orders'"></app-orders>
+  <app-customers *ngSwitchCase="'Customers'" ></app-customers>
+  <app-products *ngSwitchCase="'Products'"></app-products>
+</span>

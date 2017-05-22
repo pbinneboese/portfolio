@@ -1,0 +1,31 @@
+<div>
+<h3>Order Listing</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Order Number</th><th>Order Date</th><th>Qty</th><th>Product</th><th>Customer</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of this._storeComponent.orders">
+      <td>{{order.orderNum}}</td><td>{{order.createdAt | date:'mediumDate'}}</td><td>{{order.qty}}</td>
+      <td>{{order._product?.name}}</td><td>{{order._customer?.name}}</td>
+    </tr>
+  </tbody>
+</table>
+<hr>
+<h4>Add New Order</h4>
+<form (submit)="onCreateMade(formData)" #formData="ngForm">
+  Customer: <select name="customerName" [(ngModel)]="customerName">
+    <option *ngFor="let customer of this._storeComponent.customers" [value]="customer.name">{{customer.name}}</option>
+  </select>
+  Product: <select name="productName" [(ngModel)]="productName">
+    <option *ngFor="let product of this._storeComponent.products" [value]="product.name">{{product.name}}</option>
+  </select>
+  <p>
+  Order Number: <input type="text" name="orderNum" [(ngModel)]="newOrder.orderNum">
+  Quantity: <input type="number" name="qty" [(ngModel)]="newOrder.qty">
+  <button type="submit" [disabled]="!formData.form.valid">Order</button>
+  </p>
+</form>
+</div>
